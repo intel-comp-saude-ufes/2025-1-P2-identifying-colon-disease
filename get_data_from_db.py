@@ -35,17 +35,17 @@ class DataLoader:
         self.train_esophagitis_files = os.listdir(self.train_esophagitis_path)
 
         # Validation data paths (using "val" folder name)
-        self.validation_normal_path = os.path.join(self.path, "val", "0_normal")
-        self.validation_normal_files = os.listdir(self.validation_normal_path)
+        self.val_normal_path = os.path.join(self.path, "val", "0_normal")
+        self.val_normal_files = os.listdir(self.val_normal_path)
 
-        self.validation_ulcerative_colitis_path = os.path.join(self.path, "val", "1_ulcerative_colitis")
-        self.validation_ulcerative_colitis_files = os.listdir(self.validation_ulcerative_colitis_path)
+        self.val_ulcerative_colitis_path = os.path.join(self.path, "val", "1_ulcerative_colitis")
+        self.val_ulcerative_colitis_files = os.listdir(self.val_ulcerative_colitis_path)
 
-        self.validation_polyps_path = os.path.join(self.path, "val", "2_polyps")
-        self.validation_polyps_files = os.listdir(self.validation_polyps_path)
+        self.val_polyps_path = os.path.join(self.path, "val", "2_polyps")
+        self.val_polyps_files = os.listdir(self.val_polyps_path)
 
-        self.validation_esophagitis_path = os.path.join(self.path, "val", "3_esophagitis")
-        self.validation_esophagitis_files = os.listdir(self.validation_esophagitis_path)
+        self.val_esophagitis_path = os.path.join(self.path, "val", "3_esophagitis")
+        self.val_esophagitis_files = os.listdir(self.val_esophagitis_path)
 
     def get_test_data(self):
         """Returns all test files from all categories combined with labels (if available)"""
@@ -65,6 +65,16 @@ class DataLoader:
         all_train_files.extend([(f, 3) for f in self.train_esophagitis_files])  # label 3: esophagitis
         return all_train_files
     
+    def get_val_data(self):
+      """Returns all validation files from all categories combined"""
+      all_val_files = []
+      all_val_files.extend([(f, 0) for f in self.val_normal_files])               # label 0: normal
+      all_val_files.extend([(f, 1) for f in self.val_ulcerative_colitis_files])   # label 1: ulcerative_colitis
+      all_val_files.extend([(f, 2) for f in self.val_polyps_files])               # label 2: polyps  
+      all_val_files.extend([(f, 3) for f in self.val_esophagitis_files])          # label 3: esophagitis
+      return all_val_files
+
+
     def get_train_data_by_category(self):
         """Returns train data organized by category"""
         return {
@@ -74,6 +84,7 @@ class DataLoader:
             'esophagitis': self.train_esophagitis_files
         }
     
+    
     def get_category_counts(self):
         """Returns count of images in each category"""
         return {
@@ -82,28 +93,28 @@ class DataLoader:
             'train_ulcerative_colitis': len(self.train_ulcerative_colitis_files),
             'train_polyps': len(self.train_polyps_files),
             'train_esophagitis': len(self.train_esophagitis_files),
-            'val_normal': len(self.validation_normal_files),
-            'val_ulcerative_colitis': len(self.validation_ulcerative_colitis_files),
-            'val_polyps': len(self.validation_polyps_files),
-            'val_esophagitis': len(self.validation_esophagitis_files)
+            'val_normal': len(self.val_normal_files),
+            'val_ulcerative_colitis': len(self.val_ulcerative_colitis_files),
+            'val_polyps': len(self.val_polyps_files),
+            'val_esophagitis': len(self.val_esophagitis_files)
         }
     
     def get_validation_data(self):
         """Returns validation data organized by category"""
         return {
-            'normal': self.validation_normal_files,
-            'ulcerative_colitis': self.validation_ulcerative_colitis_files,
-            'polyps': self.validation_polyps_files,
-            'esophagitis': self.validation_esophagitis_files
+            'normal': self.val_normal_files,
+            'ulcerative_colitis': self.val_ulcerative_colitis_files,
+            'polyps': self.val_polyps_files,
+            'esophagitis': self.val_esophagitis_files
         }
     
     def get_validation_data_with_labels(self):
         """Returns all validation files from all categories combined with labels"""
         all_val_files = []
-        all_val_files.extend([(f, 0) for f in self.validation_normal_files])  # label 0: normal
-        all_val_files.extend([(f, 1) for f in self.validation_ulcerative_colitis_files])  # label 1: ulcerative_colitis
-        all_val_files.extend([(f, 2) for f in self.validation_polyps_files])  # label 2: polyps  
-        all_val_files.extend([(f, 3) for f in self.validation_esophagitis_files])  # label 3: esophagitis
+        all_val_files.extend([(f, 0) for f in self.val_normal_files])  # label 0: normal
+        all_val_files.extend([(f, 1) for f in self.val_ulcerative_colitis_files])  # label 1: ulcerative_colitis
+        all_val_files.extend([(f, 2) for f in self.val_polyps_files])  # label 2: polyps  
+        all_val_files.extend([(f, 3) for f in self.val_esophagitis_files])  # label 3: esophagitis
         return all_val_files
     
 
