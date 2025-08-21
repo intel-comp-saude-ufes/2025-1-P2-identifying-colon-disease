@@ -4,7 +4,8 @@
 
 Como parte do trabalho, foram criados dois arquivos principais:
 - `get_data_from_db.py`: Este arquivo contém a classe `DataLoader`, que é responsável por carregar os dados do banco de dados MongoDB, processar as imagens e dividir os dados em conjuntos de treino e teste.
-- `create_model.py`: Este arquivo contém a função `create_vgg_model`, que define e compila o modelo VGG16 para classificação de imagens.
+- `create_model.py`: Este arquivo contém a função `create_vgg_model`, `create_efficient_model` e `create_resnet_model`, que define e compila vários modelos que foram testados, sendo o principal a ResNet, usada para classificação de imagens.
 
 Para executar o trabalho, você deve seguir os seguintes passos:
 - Executar o arquivo `main.ipynb` no Jupyter Notebook ou em outro ambiente compatível.
+
